@@ -8,10 +8,7 @@ public class MST {
         final int A = g.getGraph().size();
         final int Infinity = Integer.MAX_VALUE;
         final Vertex root = g.getGraph().get(src);
-
-        ArrayList<Vertex> visited = new ArrayList<Vertex>();
         ArrayList<Vertex> MSTOrder = new ArrayList<Vertex>();
-        ArrayList<Vertex> PARENT = new ArrayList<Vertex>();
 
         for (Vertex v : g.getGraph()){
             v.setDistance(Infinity);
@@ -21,6 +18,9 @@ public class MST {
 
         root.setDistance(0);
 
+        /*The class Vertex implements Comparable and contains
+        a compareTo method (distance) which enables the que to
+        sort the type. Highest priority = smallest distance = head of queue */
         PriorityQueue<Vertex> priorityQueue = new PriorityQueue<Vertex>();
 
         for (Vertex v : g.getGraph()){
@@ -37,7 +37,6 @@ public class MST {
             }*/
 
             Vertex v0 = priorityQueue.poll();
-
 
             assert v0 != null;
             if (v0.isVisited())
@@ -61,10 +60,13 @@ public class MST {
             mst += v0.getDistance();
             if (!MSTOrder.contains(v0))
                 MSTOrder.add(v0);
-
         }
+       printMST(MSTOrder);
+    }
 
+    private void printMST(ArrayList<Vertex> MSTOrder) {
         int sum=0;
+        System.out.println("Minimum Spanning Tree");
         for (Vertex v : MSTOrder){
             if (v.getParent()!=null) {
                 String parent = v.getParent().getId();
@@ -76,6 +78,5 @@ public class MST {
         }
         System.out.println("\nTotal of Km.: "+sum);
         System.out.println("Price: "+sum*1000000);
-
     }
 }

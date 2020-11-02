@@ -11,16 +11,14 @@ public class AdjacencyGraph {
     }
 
     public void addVertexToGraph(Vertex v) {
-        graph.add(v);
+        if (!graph.contains(v))
+            graph.add(v);
     }
 
     public ArrayList<Vertex> getGraph() {
         return graph;
     }
 
-    public void setGraph(ArrayList<Vertex> graph) {
-        this.graph = graph;
-    }
 
     public void addEdgeToGraph(Vertex src, Vertex dest, Integer dist) {
         if (!(graph.contains(src) && graph.contains(dest))) {
