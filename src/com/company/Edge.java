@@ -16,23 +16,12 @@ class Edge {
         return src;
     }
 
-    public void setSrc(Vertex src) {
-        this.src = src;
-    }
-
     public Vertex getDest() {
         return dest;
-    }
-
-    public void setDest(Vertex dest) {
-        this.dest = dest;
     }
 
     public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
 }
