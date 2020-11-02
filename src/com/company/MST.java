@@ -4,11 +4,9 @@ import java.util.PriorityQueue;
 
 public class MST {
 
-    void primsMST(AdjacencyGraph g, int src){
-        final int A = g.getGraph().size();
+    private void init(AdjacencyGraph g, PriorityQueue priorityQueue, int src ) {
         final int Infinity = Integer.MAX_VALUE;
         final Vertex root = g.getGraph().get(src);
-        ArrayList<Vertex> MSTOrder = new ArrayList<Vertex>();
 
         for (Vertex v : g.getGraph()){
             v.setDistance(Infinity);
@@ -18,18 +16,22 @@ public class MST {
 
         root.setDistance(0);
 
+
+        priorityQueue.offer(root);
+
+    }
+
+    void primsMST(AdjacencyGraph g, int src){
+        final int A = g.getGraph().size();
+        ArrayList<Vertex> MSTOrder = new ArrayList<Vertex>();
         /*The class Vertex implements Comparable and contains
         a compareTo method (distance) which enables the que to
         sort the type. Highest priority = smallest distance = head of queue */
         PriorityQueue<Vertex> priorityQueue = new PriorityQueue<Vertex>();
 
-        for (Vertex v : g.getGraph()){
-            priorityQueue.offer(v);
-        }
+        init(g,priorityQueue,src);
 
-        int mst=0;
-
-        while (!priorityQueue.isEmpty() && MSTOrder.size()<A) {
+        while (!priorityQueue.isEmpty() /*&& MSTOrder.size()<A*/) {
 
             /*TEST
             for(Vertex x:priorityQueue) {
@@ -57,7 +59,7 @@ public class MST {
                 for (Vertex v : g.getGraph())
                     priorityQueue.offer(v);
             }
-            mst += v0.getDistance();
+
             if (!MSTOrder.contains(v0))
                 MSTOrder.add(v0);
         }
@@ -77,6 +79,6 @@ public class MST {
             sum+=v.getDistance();
         }
         System.out.println("\nTotal of Km.: "+sum);
-        System.out.println("Price: "+sum*1000000);
+        System.out.println("Price: "+sum*1000000+" kr.");
     }
 }
