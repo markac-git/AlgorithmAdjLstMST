@@ -2,10 +2,11 @@ package com.company;
 
 public class Main {
 	public static void main(String[] args) {
+		//instantiating
 		AdjacencyGraph adjGraph = new AdjacencyGraph();
 		MST mst = new MST();
 
-		//Instance variables created
+		//Instance variables are created pointing at the object created by the constructor
         Vertex Maribo  = new Vertex("Maribo");//
         Vertex Vordingborg = new Vertex("Vordingborg");//
         Vertex Korsoer = new Vertex("Korsør");//
@@ -91,10 +92,10 @@ public class Main {
 		eUtil(Ringsted,Vordingborg,58);
 		eUtil(Slagelse,Soroe,14);
 
-		adjGraph.printGraph();
-		mst.primsMST(adjGraph,0);
+		adjGraph.printGraph(); //printing existing graph
+		mst.primsMST(adjGraph,0); //running Prim's algorithm
 	}
-	//Utility method for creating edges in both directions
+	//Utility method for creating edges in both directions as the graph is undirected
 	private static void eUtil(Vertex src, Vertex dest, Integer weight) {
 		new Edge(src,dest,weight);
 		new Edge(dest,src,weight);

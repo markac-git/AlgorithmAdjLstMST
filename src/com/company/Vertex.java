@@ -22,14 +22,6 @@ class Vertex implements Comparable<Vertex>{
         this.parent = parent;
     }
 
-    public void setOutEdges(ArrayList<Edge> outEdges) {
-        this.outEdges = outEdges;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public boolean isVisited() {
         return visited;
     }
@@ -53,8 +45,6 @@ class Vertex implements Comparable<Vertex>{
 
     public void addEdge(Edge edge) {
         outEdges.add(edge);
-
-
     }
 
     public String getId() {

@@ -8,25 +8,25 @@ public class MST {
         final int Infinity = Integer.MAX_VALUE;
         final Vertex root = g.getGraph().get(src);
 
+        //for all vertices in graph
         for (Vertex v : g.getGraph()){
             v.setDistance(Infinity);
             v.setVisited(false);
             v.setParent(null);
         }
-
         root.setDistance(0);
 
-
-        priorityQueue.offer(root);
-
+        priorityQueue.offer(root); //adding root note
     }
 
     void primsMST(AdjacencyGraph g, int src){
         final int A = g.getGraph().size();
-        ArrayList<Vertex> MSTOrder = new ArrayList<Vertex>();
+        ArrayList<Vertex> MSTOrder = new ArrayList<Vertex>(); //keeps track of MST
         /*The class Vertex implements Comparable and contains
         a compareTo method (distance) which enables the que to
         sort the type. Highest priority = smallest distance = head of queue */
+
+        //sorting vertices on the distances (regarding: Vertex, l: 55-60)
         PriorityQueue<Vertex> priorityQueue = new PriorityQueue<Vertex>();
 
         init(g,priorityQueue,src);
@@ -38,30 +38,30 @@ public class MST {
                 System.out.println(x.getId() + " : " + x.getDistance()+ "  :  "+x.isVisited());
             }*/
 
-            Vertex v0 = priorityQueue.poll();
+            Vertex v0 = priorityQueue.poll(); //removing vertex with smallest distance value from PQ
 
             assert v0 != null;
             if (v0.isVisited())
-                continue;
+                continue; //Skipping to next iteration of while-loop
 
 
+            //for every outedge of v0
             for (Edge outEdge : v0.getOutEdges()) {
-                Vertex v1 = outEdge.getDest();
+                Vertex v1 = outEdge.getDest(); //get adjacent vertex
                 v0.setVisited(true);
 
                 if (!v1.isVisited() && outEdge.getWeight() < v1.getDistance()) {
                     v1.setDistance(outEdge.getWeight());
-                    v1.setParent(outEdge.getSrc());
-                    priorityQueue.offer(v1);
+                    v1.setParent(outEdge.getSrc());//v0
                 }
-
-                priorityQueue.clear();
-                for (Vertex v : g.getGraph())
-                    priorityQueue.offer(v);
             }
+            //updates PQ
+            priorityQueue.clear();
+            for (Vertex v : g.getGraph())
+                priorityQueue.offer(v);
 
             if (!MSTOrder.contains(v0))
-                MSTOrder.add(v0);
+                MSTOrder.add(v0); //adding v0 to MST
         }
        printMST(MSTOrder);
     }
