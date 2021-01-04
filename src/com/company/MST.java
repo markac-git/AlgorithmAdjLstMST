@@ -16,7 +16,7 @@ public class MST {
         }
         root.setDistance(0);
 
-        priorityQueue.offer(root); //adding root note
+        priorityQueue.offer(root); //adding root note //log(V)
     }
 
     void primsMST(AdjacencyGraph g, int src){
@@ -31,7 +31,7 @@ public class MST {
 
         init(g,priorityQueue,src);
 
-        while (!priorityQueue.isEmpty() /*&& MSTOrder.size()<A*/) { //O(V)
+        while (!priorityQueue.isEmpty() || MSTOrder.size()<A) { //O(V)
 
             /*TEST
             for(Vertex x:priorityQueue) {
@@ -52,7 +52,7 @@ public class MST {
                 if (!v1.isVisited() && outEdge.getWeight() < v1.getDistance()) {
                     v1.setDistance(outEdge.getWeight());
                     v1.setParent(outEdge.getSrc());//v0
-                    priorityQueue.offer(v1);
+                    priorityQueue.offer(v1); //ElogV say every edge is attached to this vertex
                 }
             }
 
