@@ -31,14 +31,13 @@ public class MST {
 
         init(g,priorityQueue,src);
 
-        while (!priorityQueue.isEmpty() /*&& MSTOrder.size()<A*/) {
+        while (!priorityQueue.isEmpty() /*&& MSTOrder.size()<A*/) { //O(V)
 
             /*TEST
             for(Vertex x:priorityQueue) {
                 System.out.println(x.getId() + " : " + x.getDistance()+ "  :  "+x.isVisited());
             }*/
-
-            Vertex v0 = priorityQueue.poll(); //removing vertex with smallest distance value from PQ
+            Vertex v0 = priorityQueue.poll(); //removing vertex with smallest distance value from PQ //O(log(V))
 
             assert v0 != null;
             if (v0.isVisited())
@@ -53,12 +52,17 @@ public class MST {
                 if (!v1.isVisited() && outEdge.getWeight() < v1.getDistance()) {
                     v1.setDistance(outEdge.getWeight());
                     v1.setParent(outEdge.getSrc());//v0
+                    priorityQueue.offer(v1);
                 }
             }
-            //updates PQ
-            priorityQueue.clear();
-            for (Vertex v : g.getGraph())
-                priorityQueue.offer(v);
+
+
+//            //updates PQ
+//            priorityQueue.clear();
+//            for (Vertex v : g.getGraph())
+//                priorityQueue.offer(v); //O(V^2*Log(V))
+
+
 
             if (!MSTOrder.contains(v0))
                 MSTOrder.add(v0); //adding v0 to MST
